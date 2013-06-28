@@ -18,7 +18,7 @@ public class ApiscolPreviews extends ServletContainer {
 	@Context
 	ServletContext context;
 
-	public ApiscolPreviews() {
+	public ApiscolPreviews() { 
 
 	}
 
