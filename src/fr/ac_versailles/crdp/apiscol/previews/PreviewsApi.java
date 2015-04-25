@@ -63,7 +63,7 @@ public class PreviewsApi extends ApiscolApi {
 			initializeResourceDirectoryInterface(context);
 			createConversionExecutor();
 			readPageLimit(context);
-			sheduleDirectoryCleaning(cleaningDelay);
+			sheduleDirectoryCleaning(cleaningDelay);  
 			isInitialized = true;
 		}
 	}
@@ -74,13 +74,12 @@ public class PreviewsApi extends ApiscolApi {
 		sheduler = Executors.newScheduledThreadPool(1);
 		DirectoryCleaner cleaner = new DirectoryCleaner();
 		sheduler.scheduleAtFixedRate(cleaner, delay * 3600, delay * 3600,
-				TimeUnit.SECONDS);
+				TimeUnit.SECONDS); 
 	}
 
 	private void readPageLimit(ServletContext context) {
 		absolutePageLimit = Integer.parseInt(getProperty(
 				ParametersKeys.absolutePageLimit, context));
-
 	}
 
 	private void initializeResourceDirectoryInterface(ServletContext context) {
@@ -201,7 +200,8 @@ public class PreviewsApi extends ApiscolApi {
 				mimeType, outputMimeTypeList,
 				FileSystemAccess.getIncomingFile(newJobId, fileName),
 				FileSystemAccess.getOutputDir(newJobId),
-				Math.min(limit, absolutePageLimit), conversion);
+				Math.min(limit, absolutePageLimit), conversion,
+				context.getRealPath(""));
 		if (worker == null) {
 			String message2 = "Mimetype of the file : "
 					+ fileName
